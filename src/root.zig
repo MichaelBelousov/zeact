@@ -200,7 +200,7 @@ fn renderToUpdateBuffer(comptime html: []const u8, vars: anytype, components: an
         switch (instr) {
             .text_embed => |v| buff.writer().print("text_embed='{s}'\n", .{v}) catch unreachable,
             .attr_embed => |v| buff.writer().print("attr_embed='{s}'\n", .{v}) catch unreachable,
-            .component => buff.writer().print("component?\n", .{}) catch unreachable,
+            .component => |c| buff.writer().print("component?\n", .{c(0)}) catch unreachable,
             .dom_fragment => |v| buff.writer().print("fragment='{s}'\n", .{v}) catch unreachable,
         }
     }
